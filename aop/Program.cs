@@ -28,7 +28,7 @@ namespace aop
 
             var willBeIntercepted = container.Resolve<ICalculator>();
 
-            willBeIntercepted.Add(4, 5);
+            willBeIntercepted.Divide(1,0);
 
 
             Console.ReadLine();
