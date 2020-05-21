@@ -10,25 +10,33 @@ namespace aop
         {
             Console.WriteLine("Hello World!");
 
-            var builder = new ContainerBuilder();
+            //var builder = new ContainerBuilder();
 
-            builder.RegisterType<Calculator>()
-                .As<ICalculator>()
-                .EnableInterfaceInterceptors();
-                //.InterceptedBy(typeof(Logger));
+            //builder.RegisterType<Calculator>()
+            //    .As<ICalculator>()
+            //    .EnableInterfaceInterceptors();
+            //    //.InterceptedBy(typeof(Logger));
 
             // Name registration
-            //builder.Register(i => new Logger(Console.Out))
+            // builder.Register(i => new Logger(Console.Out))
             //    .Named<IInterceptor>("log-calls");
 
             // Typed registration
-            builder.Register(c => new Logger(Console.Out));
+            //builder.Register(c => new Logger(Console.Out));
 
-            var container = builder.Build();
+            //var container = builder.Build();
 
-            var willBeIntercepted = container.Resolve<ICalculator>();
+            //var willBeIntercepted = container.Resolve<ICalculator>();
 
-            willBeIntercepted.Add(4, 5);
+            FactoryLogger  fc = new FactoryLogger();
+
+            fc.AddType<Calculator, ICalculator>();
+
+            fc.GenerateContainer();
+
+            var willBeIntercepted = fc.GetResolved<ICalculator>();
+
+            willBeIntercepted.Divide(1,0);
 
 
             Console.ReadLine();
