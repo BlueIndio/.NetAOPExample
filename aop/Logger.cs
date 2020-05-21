@@ -13,6 +13,7 @@ namespace aop
         {
             writer = textWriter ?? throw new ArgumentNullException(nameof(writer));
         }
+
         public void Intercept(IInvocation invocation)
         {
             var name = string.Empty;
