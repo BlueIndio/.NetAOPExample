@@ -1,8 +1,10 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace MyWebServiceApi
+namespace aop
 {
-    public class WeatherForecast
+    public partial class WeatherForecast
     {
         public DateTime Date { get; set; }
 

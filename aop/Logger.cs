@@ -9,6 +9,11 @@ namespace aop
     {
         readonly TextWriter writer;
 
+        private static readonly string[] Summaries = new[]
+        {
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
+
         public Logger(TextWriter textWriter)
         {
             writer = textWriter ?? throw new ArgumentNullException(nameof(writer));
@@ -35,11 +40,17 @@ namespace aop
                 writer.WriteLine($"Execution Time: {executionTime} ms.");
                 writer.WriteLine();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 writer.WriteLine($"Exception: result was {ex.Message}");
-                throw;
+                var rng = new Random();
 
+                invocation.ReturnValue = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+                {
+                    Date = DateTime.Now.AddDays(index),
+                    TemperatureC = rng.Next(-20, 55),
+                    Summary = Summaries[rng.Next(Summaries.Length)]
+                }).ToArray();
             }
 
 
