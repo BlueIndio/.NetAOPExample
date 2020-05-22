@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Autofac.Extras.DynamicProxy;
 using System;
 using System.Collections.Generic;
@@ -8,27 +9,28 @@ namespace aop
 {
     public partial class FactoryLogger
     {
-        private readonly ContainerBuilder builder;
+        public ContainerBuilder Builder { get; set; }
 
         private IContainer container;
 
-        public FactoryLogger()
+        public FactoryLogger(ContainerBuilder containerBuilder)
         {
-            builder = new ContainerBuilder();
+            Builder = containerBuilder;
 
-            builder.Register(c => new Logger(Console.Out));
+            Builder.Register(c => new Logger(Console.Out));
         }
 
         public void AddType<TClass, TInterface>() 
         {
-            builder.RegisterType<TClass>()
+            Builder.RegisterType<TClass>()
                     .As<TInterface>()
                     .EnableInterfaceInterceptors();   
         }
 
-        public void GenerateContainer() 
+        public void GenerateServiceProvider() 
         {
-            container = builder.Build();
+            container = Builder.Build();
+
         }
 
         public TService GetResolved<TService>() where TService : notnull
