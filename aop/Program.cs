@@ -1,6 +1,4 @@
-﻿using Autofac;
-using Autofac.Extras.DynamicProxy;
-using System;
+﻿using System;
 
 namespace aop
 {
@@ -28,15 +26,15 @@ namespace aop
 
             //var willBeIntercepted = container.Resolve<ICalculator>();
 
-            FactoryLogger  fc = new FactoryLogger();
+            FactoryLogger fc = new FactoryLogger();
 
             fc.AddType<Calculator, ICalculator>();
 
-            fc.GenerateContainer();
+            fc.GenerateServiceProvider();
 
             var willBeIntercepted = fc.GetResolved<ICalculator>();
 
-            willBeIntercepted.Divide(1,0);
+            willBeIntercepted.Divide(1, 0);
 
 
             Console.ReadLine();
