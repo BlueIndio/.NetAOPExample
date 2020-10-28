@@ -3,9 +3,9 @@ using MyWebServiceApi.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace MyWebServiceApi
+namespace MyWebServiceApi.Services
 {
-    public partial class MyService : IMyService
+    public partial class WeatherService : IWeatherService
     {
         public IEnumerable<WeatherForecast> GetData()
         {

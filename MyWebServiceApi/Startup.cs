@@ -1,19 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using aop;
 using Autofac;
 using Autofac.Extras.DynamicProxy;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using MyWebServiceApi.Interfaces;
+using MyWebServiceApi.Services;
+using System;
 
 namespace MyWebServiceApi
 {
@@ -36,14 +31,11 @@ namespace MyWebServiceApi
         public void ConfigureContainer(ContainerBuilder builder)
         {
             // Add things to the Autofac ContainerBuilder.
-            //FactoryLogger fc = new FactoryLogger(builder);
-            //builder.
-            //fc.AddType<IMyService, MyService>();
 
             builder.Register(c => new Logger(Console.Out));
 
-            builder.RegisterType<MyService>()
-                    .As<IMyService>()
+            builder.RegisterType<WeatherService>()
+                    .As<IWeatherService>()
                     .EnableInterfaceInterceptors();
         }
 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace MyWebServiceApi.Interfaces
 {
     [Intercept(typeof(Logger))]
-    public partial interface IMyService
+    public partial interface IWeatherService
     {
 
         IEnumerable<WeatherForecast> GetData();

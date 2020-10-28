@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using aop;
+﻿using aop;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using MyWebServiceApi.Interfaces;
+using System;
+using System.Collections.Generic;
 
 namespace MyWebServiceApi.Controllers
 {
@@ -14,8 +11,8 @@ namespace MyWebServiceApi.Controllers
     public class WeatherForecastController : ControllerBase
     {
 
-        private readonly IMyService myService;
-        public WeatherForecastController(IMyService _myService)
+        private readonly IWeatherService myService;
+        public WeatherForecastController(IWeatherService _myService)
         {
             myService = _myService ?? throw new ArgumentNullException(nameof(myService));
         }
