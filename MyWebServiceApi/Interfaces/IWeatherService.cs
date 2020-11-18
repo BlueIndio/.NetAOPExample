@@ -10,6 +10,8 @@ namespace MyWebServiceApi.Interfaces
 
         IEnumerable<WeatherForecast> GetData();
 
+        IEnumerable<WeatherForecast> GetData(IEnumerable<WeatherForecast> list, int param1, int param2);
+
 
     }
 }

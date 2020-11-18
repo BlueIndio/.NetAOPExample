@@ -22,5 +22,11 @@ namespace MyWebServiceApi.Controllers
         {
             return myService.GetData();
         }
+
+        [HttpGet("params")]
+        public IEnumerable<WeatherForecast> GetParams()
+        {
+            return myService.GetData(null, -1, -1);
+        }
     }
 }

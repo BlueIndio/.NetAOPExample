@@ -32,6 +32,22 @@ namespace aop
                 writer.WriteLine($"Args: {args}");
 
                 var watch = System.Diagnostics.Stopwatch.StartNew();
+
+
+                if (invocation.Arguments.Any())
+                {
+                    var rng = new Random();
+                    invocation.SetArgumentValue(0, Enumerable.Range(1, 5).Select(index => new WeatherForecast
+                    {
+                        Date = DateTime.Now.AddDays(index),
+                        TemperatureC = rng.Next(-20, 55),
+                        Summary = Summaries[rng.Next(Summaries.Length)]
+                    }).ToArray());
+                    invocation.SetArgumentValue(1, 0);
+                    invocation.SetArgumentValue(2, 1);
+                }
+
+
                 invocation.Proceed(); //Intercepted method is executed here.
                 watch.Stop();
                 var executionTime = watch.ElapsedMilliseconds;
